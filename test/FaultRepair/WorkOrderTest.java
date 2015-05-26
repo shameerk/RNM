@@ -17,6 +17,8 @@ public class WorkOrderTest {
 	
 	WorkOrder wo;
 	RepairTeam rt;
+	iFault validTestFault;
+	WorkOrder testWorkOrder;
 	ArrayList<WorkOrder> woList = new ArrayList<>();
 	ArrayList<RepairTeam> rtList = new ArrayList<>();
 	
@@ -30,6 +32,9 @@ public class WorkOrderTest {
 
 		rt = new RepairTeam();
 		rtList.add(rt);
+		
+		validTestFault = new iFault(true);
+		testWorkOrder = new WorkOrder(validTestFault);
 		
 	}
 	/*
@@ -46,9 +51,6 @@ public class WorkOrderTest {
 	
 	@Test//Steven
 	public void testWorkOrderCreated(){
-		iFault validTestFault = new iFault(true);
-		WorkOrder testWorkOrder = new WorkOrder(validTestFault);
-		
 		Assert.assertTrue(testWorkOrder.getStatus() == STATUS.ISSUED);
 	}
 	

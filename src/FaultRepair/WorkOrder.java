@@ -13,6 +13,7 @@ public class WorkOrder {
 		this.status = STATUS.NOSTATUS;
 	}
 	
+	//Steven
 	public WorkOrder(iFault fault){
 		if (fault.verified()){
 			this.status =  STATUS.ISSUED;	
@@ -43,6 +44,7 @@ public class WorkOrder {
 	}
 }
 
+//Steven
 class iFault{
 	private boolean verified;
 	
