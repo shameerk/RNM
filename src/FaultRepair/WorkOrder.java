@@ -13,6 +13,12 @@ public class WorkOrder {
 		this.status = STATUS.NOSTATUS;
 	}
 	
+	public WorkOrder(iFault fault){
+		if (fault.verified()){
+			this.status =  STATUS.ISSUED;	
+		}
+	}
+	
 	public STATUS getStatus() {
 		return status;
 	}
@@ -35,7 +41,16 @@ public class WorkOrder {
 		this.scheduleTime = dateAndTime;
 		this.status = STATUS.SCHEDULED;
 	}
+}
 
+class iFault{
+	private boolean verified;
 	
-	
+	public iFault(boolean faultState){
+		this.verified=faultState;	
+	}
+
+	public boolean verified(){
+		return this.verified;
+	}
 }

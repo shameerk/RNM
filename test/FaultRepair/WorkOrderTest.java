@@ -13,9 +13,6 @@ import FaultRepair.RepairTeam;
 import FaultRepair.STATUS;
 import FaultRepair.WorkOrder;
 
-
-
-
 public class WorkOrderTest {
 	
 	WorkOrder wo;
@@ -23,11 +20,6 @@ public class WorkOrderTest {
 	ArrayList<WorkOrder> woList = new ArrayList<>();
 	ArrayList<RepairTeam> rtList = new ArrayList<>();
 	
-	/**
-	 * 
-	 * Set up the system the way my system needs to receive it
-	 * 
-	 */
 	@Before
 	public void upFront(){
 		
@@ -52,44 +44,52 @@ public class WorkOrderTest {
 	}
 	*/
 	
-	@Test
+	@Test//Steven
+	public void testWorkOrderCreated(){
+		iFault validTestFault = new iFault(true);
+		WorkOrder testWorkOrder = new WorkOrder(validTestFault);
+		
+		Assert.assertTrue(testWorkOrder.getStatus() == STATUS.ISSUED);
+	}
+	
+	@Test//Thinus
 	public void weHaveAListOfWorkOrders(){
 		Assert.assertTrue(woList instanceof List);
 	}
 	
 	
-	@Test 
+	@Test //Thinus
 	public void weHaveAListOfApprovedRepairTeams(){
 		Assert.assertTrue(rtList instanceof List);
 	}
 	
-	@Test
+	@Test//Thinus
 	public void allTheWorkOrdersHaveStatusIssued(){
 		for(WorkOrder wo: woList){
 			Assert.assertEquals(STATUS.ISSUED,wo.getStatus());
 		}
 	}
 	
-	@Test
+	@Test//Thinus
 	public void aRepairTeamCanBeAssignedToAWorkOrder(){
 		wo.assignRepairTeam(rtList.get(0));
 		
 	}
 	
-	@Test
+	@Test//Thinus
 	public void whenARepairTeamIsAssignedToAWorkOrderItsStatusChangesToAssigned(){
 		wo.assignRepairTeam(rtList.get(0));
 		Assert.assertEquals(STATUS.ASSIGNED,wo.getStatus());
 	}
 	
-	@Test
+	@Test//Thinus
 	public void aDateAndTimeCanBeAssignedToAWorkOrder(){
 		Date dateAndTime = new Date();
 		wo.schedule(dateAndTime);
 	}
 
 	
-	@Test
+	@Test//Thinus
 	public void whenADateAndTimesAssignedToAWorkOrderItsStatusChangesToScheduled(){
 		Date dateAndTime = new Date();
 		wo.schedule(dateAndTime);
