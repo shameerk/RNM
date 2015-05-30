@@ -1,0 +1,11 @@
+Feature: A date and time can be assigned to a work order
+
+Background: 
+Given we have a list of WorkOrders. 
+Given we have a list of RepairTeams.
+
+Given the work order is assigned
+When the work order scheduler picks a date and time for execution
+Then the work order status changes to scheduled
+
+

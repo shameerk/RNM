@@ -1,20 +1,16 @@
 package FaultRepair;
 
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Assert;
 
-import FaultRepair.RepairTeam;
-import FaultRepair.STATUS;
-import FaultRepair.WorkOrder;
-
-
-public class WorkOrderSchedulerTest {
+public class AssignDateTimeToAWorkOrderFeatureTest {
 
 	WorkOrder wo;
 	RepairTeam rt;
@@ -41,35 +37,23 @@ public class WorkOrderSchedulerTest {
 		testValidWorkOrder = new WorkOrder(validTestFault);
 		//testValidWorkOrder = new WorkOrder(invalidTestFault);
 	}
-
-	@Test
-	public void weHaveAListOfWorkOrders(){
+	
+	@Before
+	public void GivenWeHaveAListOfWorkOrders(){
 		Assert.assertTrue(woList instanceof List);
 	}
 	
 	
-	@Test 
-	public void weHaveAListOfApprovedRepairTeams(){
+	@Before
+	public void GivenweHaveAListOfApprovedRepairTeams(){
 		Assert.assertTrue(rtList instanceof List);
 	}
 	
-	@Test
-	public void allTheWorkOrdersHaveStatusIssued(){
+	@Before
+	public void GivenAllTheWorkOrdersHaveStatusIssued(){
 		for(WorkOrder wo: woList){
 			Assert.assertEquals(STATUS.ISSUED,wo.getStatus());
 		}
-	}
-	
-	@Test
-	public void aRepairTeamCanBeAssignedToAWorkOrder(){
-		wo.assignRepairTeam(rtList.get(0));
-		
-	}
-	
-	@Test
-	public void whenARepairTeamIsAssignedToAWorkOrderItsStatusChangesToAssigned(){
-		wo.assignRepairTeam(rtList.get(0));
-		Assert.assertEquals(STATUS.ASSIGNED,wo.getStatus());
 	}
 	
 	@Test
@@ -81,9 +65,8 @@ public class WorkOrderSchedulerTest {
 	
 	@Test
 	public void whenADateAndTimesAssignedToAWorkOrderItsStatusChangesToScheduled(){
-		Date dateAndTime = new Date();
-		wo.schedule(dateAndTime);
+		aDateAndTimeCanBeAssignedToAWorkOrder();
 		Assert.assertEquals(STATUS.SCHEDULED, wo.getStatus());
 	}
-	
+
 }
