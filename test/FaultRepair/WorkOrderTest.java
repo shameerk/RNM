@@ -17,8 +17,8 @@ public class WorkOrderTest {
 	
 	WorkOrder wo;
 	RepairTeam rt;
-	iFault validTestFault;
-	WorkOrder testWorkOrder;
+	iFault validTestFault,invalidTestFault;
+	WorkOrder testValidWorkOrder;
 	ArrayList<WorkOrder> woList = new ArrayList<>();
 	ArrayList<RepairTeam> rtList = new ArrayList<>();
 	
@@ -34,8 +34,10 @@ public class WorkOrderTest {
 		rtList.add(rt);
 		
 		validTestFault = new iFault(true);
-		testWorkOrder = new WorkOrder(validTestFault);
+		invalidTestFault = new iFault(false);
 		
+		testValidWorkOrder = new WorkOrder(validTestFault);
+		//testValidWorkOrder = new WorkOrder(invalidTestFault);
 	}
 	/*
 	@Test
@@ -51,7 +53,13 @@ public class WorkOrderTest {
 	
 	@Test//Steven
 	public void testWorkOrderCreated(){
-		Assert.assertTrue(testWorkOrder.getStatus() == STATUS.ISSUED);
+		Assert.assertTrue(testValidWorkOrder.getStatus() == STATUS.ISSUED);
+	}
+	
+	@Test//Steven
+	public void testWorkOrderNotCreatedOnInvalidFault(){
+		WorkOrder testInvalidWorkOrder = new WorkOrder(invalidTestFault); 
+		Assert.assertTrue(testInvalidWorkOrder.getStatus() == STATUS.NOSTATUS);
 	}
 	
 	@Test//Thinus

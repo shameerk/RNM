@@ -15,11 +15,18 @@ public class WorkOrder {
 	
 	//Steven
 	public WorkOrder(iFault fault){
-		if (fault.verified()){
-			this.status =  STATUS.ISSUED;	
-		}
+		setWorkOrderStatusForFaultStatus(fault);
 	}
 	
+	//Steven
+	private void setWorkOrderStatusForFaultStatus(iFault fault){
+		if (fault.verified()){
+			setStatus(STATUS.ISSUED);	
+		}
+		else setStatus(STATUS.NOSTATUS);
+	}
+	
+	//steven
 	public STATUS getStatus() {
 		return status;
 	}
