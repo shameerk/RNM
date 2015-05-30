@@ -7,10 +7,15 @@ public class FieldInvestigator {
 private Geolocation geolocation;
 private String areaOfJurisdiction;
 private GoogleMap googleMap;
+Private ReportCard reportcard;
 
 public FieldInvetigator(Geolocation geolocation,String areaOfJurisdiction){
   	this.areaOfJurisdiction = areaOfJurisdiction;
   	this.geolocation = areaOfJurisdiction;
+}
+
+public ReportCard setReportCrad(){
+	ReportCard = new ReportCard();
 }
 
 public String getAreaOfJurisdiction() {
