@@ -16,12 +16,17 @@ public class WorkOrderTest {
 
 	private iFault _validTestFault,_invalidTestFault;
 	private WorkOrder _validWorkOrder,_invalidWorkOrder;
+	private iFault _validFaultWithGeolocation;
 	
 	@Before
 	public void upFront(){
 			
 		_validTestFault = new iFault(true);
 		_invalidTestFault = new iFault(false);
+		
+		_validFaultWithGeolocation = new iFault(true);
+		_validFaultWithGeolocation.validGeoLocation(true);
+		
 		
 		_validWorkOrder = new WorkOrder(_validTestFault);
 		_invalidWorkOrder = new WorkOrder(_invalidTestFault);
@@ -39,10 +44,17 @@ public class WorkOrderTest {
 	
 	@Test//Steven
 	public void workOrderCreatedForFaultsVisibileOnMap(){
-		iFault validFaultWithGeolocation = new iFault(true);
-		validFaultWithGeolocation.validGeoLocation(true);
-		WorkOrder validWorkOrder = new WorkOrder(validFaultWithGeolocation);
+		WorkOrder validWorkOrder = new WorkOrder(_validFaultWithGeolocation);
 		
 		Assert.assertTrue(validWorkOrder.getStatus() == STATUS.ISSUED);
+	}
+	
+	@Test//Steven
+	public void workOrderCreatedProvidedThereIsNoOutstandingWorkOrder(){
+		_validFaultWithGeolocation.hasWorkOrder(false);
+		
+		WorkOrder validWorkOrder = new WorkOrder(_validFaultWithGeolocation);
+		
+		Assert.assertTrue(validWorkOrder.getStatus() ==STATUS.ISSUED);
 	}
 }

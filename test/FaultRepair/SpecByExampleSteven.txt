@@ -1,0 +1,88 @@
+
+4.1
+Verbose:
+Given a verified fault is open 
+and there is not a work order for this fault
+When logged faults are visible on map
+and work order creator drills down into fault report card
+and there is no outstanding work order
+Then a work order and bill of materials is created 
+
+Feature:
+Given a verified fault is open 
+When logged faults are visible on map
+Then a work order is created 
+
+Scenario 1: no outstanding work orders
+
+Scenario 1.1
+Given there is no outstanding work order for this fault
+When Work Order Creator drills down into fault report card
+and there is no outstanding work order
+Then a work order is created
+
+Scenario 1.2: Image creation and annotation
+Given a work order is being created
+When Graphical information is being added to the work order
+Then the Work Order creator is able to annotate or incorporate images
+
+Scenario 1.3: bill of materials creation
+Given a Work order is being created
+When the nature of the work is being specified
+Then a bill of materials is created
+
+Scenario 2: Permissions
+Given the user has permission to view the fault
+When the user attempts to view logged faults
+Then Display this as list or map as specified
+
+Scenario 4: Work order to be modified, being modified by another user
+Given a fault is being modified by another user
+When the Work Order Creator attempts attach a work order
+Then deny the attempt
+
+Scenario 5: Attaching new work orders
+Given a work order exists
+When attempting to create new work order and existing work has been verified by Fault Resolution Team
+Then allow creation of new work order
+
+
+
+4.2
+Verbose
+Given a work order has been issued
+and a nearby team has been identified
+When faults on the work order are nearby
+and are similar in nature
+and require the same repair equipment
+Then a work order scheduler manually allocates a repair team
+and gives a date and time for repair
+and inputs this detail into the map
+
+Feature:
+Given a work order has been issued
+When faults on the work order are nearby
+Then a work order scheduler manually allocates a repair team
+
+Scenario 1: Work Order identified for scheduling
+Given A Work Order Scheduler has Identified Work Order for Scheduling
+When a date is identified where a Team is available
+Then assign work order to the team    
+
+
+4.3
+Verbose:
+Given a work order has been scheduled for given day
+When the repair team leader logs on
+Then work orders for the day are downloaded to mobile device
+and team leader is directed to work order locations
+
+Feature
+Given a work order has been scheduled for given day
+When the repair team leader logs on
+Then work orders for the day are downloaded to mobile device
+
+Scenario 1:Team leader reviews work schedule
+Given Team Leader Accesses Work Order Schedule
+When Team Leader Accesses Work Order
+Then Team Leader is Directed to next Work Order Location
