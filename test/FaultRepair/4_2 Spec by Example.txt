@@ -1,0 +1,17 @@
+Feature: A repair team can be assigned to a work order
+
+Background: 
+
+Given a work order has been issued
+When the work order assigns a repair team to the work order
+Then the work order status changes to assigned
+
+
+
+Feature: A date and time can be assigned to a work order
+
+Given the work order is assigned
+When the work order scheduler picks a date and time for execution
+Then the work order status changes to scheduled
+
+
