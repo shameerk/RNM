@@ -20,13 +20,13 @@ public class WorkOrder {
 	
 	//Steven
 	private void setWorkOrderStatusForFaultStatus(iFault fault){
-		if (fault.verified()){
+		if (fault.verified() && fault.validLocation()){
 			setStatus(STATUS.ISSUED);	
 		}
 		else setStatus(STATUS.NOSTATUS);
 	}
 	
-	//steven
+	//Steven
 	public STATUS getStatus() {
 		return status;
 	}
@@ -54,6 +54,7 @@ public class WorkOrder {
 //Steven
 class iFault{
 	private boolean verified;
+	private boolean validLocation=false;
 	
 	public iFault(boolean faultState){
 		this.verified=faultState;	
@@ -61,5 +62,13 @@ class iFault{
 
 	public boolean verified(){
 		return this.verified;
+	}
+	
+	public boolean validLocation(){
+		return this.validLocation;
+	}
+	
+	public void validGeoLocation(boolean validLocation){
+		this.validLocation=validLocation;
 	}
 }

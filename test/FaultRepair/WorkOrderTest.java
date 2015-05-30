@@ -1,66 +1,48 @@
 package FaultRepair;
 
 
-import java.util.ArrayList;
+/*import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.List;*/
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 
-import FaultRepair.RepairTeam;
 import FaultRepair.STATUS;
 import FaultRepair.WorkOrder;
 
 public class WorkOrderTest {
-	
-	WorkOrder wo;
-	RepairTeam rt;
-	iFault validTestFault,invalidTestFault;
-	WorkOrder testValidWorkOrder;
-	ArrayList<WorkOrder> woList = new ArrayList<>();
-	ArrayList<RepairTeam> rtList = new ArrayList<>();
+
+	private iFault _validTestFault,_invalidTestFault;
+	private WorkOrder _validWorkOrder,_invalidWorkOrder;
 	
 	@Before
 	public void upFront(){
+			
+		_validTestFault = new iFault(true);
+		_invalidTestFault = new iFault(false);
 		
-		wo = new WorkOrder();
-		wo.setStatus(STATUS.ISSUED);
-		
-		woList.add(wo);
-
-		rt = new RepairTeam();
-		rtList.add(rt);
-		
-		validTestFault = new iFault(true);
-		invalidTestFault = new iFault(false);
-		
-		testValidWorkOrder = new WorkOrder(validTestFault);
-		//testValidWorkOrder = new WorkOrder(invalidTestFault);
-	}
-	/*
-	@Test
-	public void weHaveAWorkOrderClass(){
-		wo = new WorkOrder();
-	}
-	
-	@Test
-	public void weHaveAListOfWorkOrders(){
-		ArrayList<WorkOrder> woList = new ArrayList<>();
-	}
-	*/
-	
-	@Test//Steven
-	public void testWorkOrderCreated(){
-		Assert.assertTrue(testValidWorkOrder.getStatus() == STATUS.ISSUED);
+		_validWorkOrder = new WorkOrder(_validTestFault);
+		_invalidWorkOrder = new WorkOrder(_invalidTestFault);
 	}
 	
 	@Test//Steven
-	public void testWorkOrderNotCreatedOnInvalidFault(){
-		WorkOrder testInvalidWorkOrder = new WorkOrder(invalidTestFault); 
-		Assert.assertTrue(testInvalidWorkOrder.getStatus() == STATUS.NOSTATUS);
+	public void testWorkOrderCreatedNoStatusForInvalidGeoLocation(){
+		Assert.assertTrue(_validWorkOrder.getStatus() == STATUS.NOSTATUS);
 	}
 	
-
+	@Test//Steven
+	public void testWorkOrderNotCreatedOnInvalidFault(){ 
+		Assert.assertTrue(_invalidWorkOrder.getStatus() == STATUS.NOSTATUS);
+	}
+	
+	@Test//Steven
+	public void workOrderCreatedForFaultsVisibileOnMap(){
+		iFault validFaultWithGeolocation = new iFault(true);
+		validFaultWithGeolocation.validGeoLocation(true);
+		WorkOrder validWorkOrder = new WorkOrder(validFaultWithGeolocation);
+		
+		Assert.assertTrue(validWorkOrder.getStatus() == STATUS.ISSUED);
+	}
 }
