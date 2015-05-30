@@ -4,7 +4,13 @@ public class Fault
 {
 
 	private int id;
-
+	private String status;
+	private String address;
+	private String type;
+	private Geolocator geocode; 
+	private String priority;
+	private Date effectiveToFixDate;
+	
 	public int getId() {
 		return id;
 	}
@@ -13,35 +19,40 @@ public class Fault
 		this.id = id;
 	}
 	
-	public String toString(){
-		return "Fault id: " + this.id;
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(int id) {
+		this.address = address;
 	}
 	
-	
-	
-	
-}
+	public String getType() {
+		return type;
+	}
 
-public class FaultLogger  
- {  
- private ArrayList<Fault> FaultList = new ArrayList<Fault>();  
- private Fault;  
-	  
- public FaultList getFaultList(){  
- 	return FaultList;  
- }  
-  
- public FaultList nearbyFaults(Period){  
-	return Fault;  
- }   
-  
-  public void setFaultList(FaultList){  
-  	this.FaultList;  
-  	
- }  
-  public Fault faultCreator(){  
-  	Fault = new Fault();  
- }  
- 
- 	
- }  
+	public void setType(int type) {
+		this.type = type;
+	}
+	
+	public String getPriority() {
+		return priority;
+	}
+
+	public void setPriority(int Priority) {
+		this.priority = priority;
+	}
+	
+	public String getGeoCode() {
+		return type;
+	}
+
+	public void setGeoCode(GeoLocator geoCode) {
+		this.geoCode= geoCode;
+	}
+	
+	public geocode getGeoLocation(Address){
+		return geocode;
+	}
+}
+}  
