@@ -24,16 +24,13 @@ public class AssignRepairTeamToAWorkOrderFeatureTest {
 	public void upFront(){
 		
 		wo = new WorkOrder();
-		wo.setStatus(STATUS.ISSUED);
+		wo.setStatus(WorkOrder.STATUS.ISSUED);
 		
 		woList.add(wo);
 
 		rt = new RepairTeam();
 		rtList.add(rt);
-		
-		validTestFault = new iFault(true);
-		invalidTestFault = new iFault(false);
-		
+				
 		testValidWorkOrder = new WorkOrder(validTestFault);
 		//testValidWorkOrder = new WorkOrder(invalidTestFault);
 	}
@@ -52,7 +49,7 @@ public class AssignRepairTeamToAWorkOrderFeatureTest {
 	@Before
 	public void givenAllTheWorkOrdersHaveStatusIssued(){
 		for(WorkOrder wo: woList){
-			Assert.assertEquals(STATUS.ISSUED,wo.getStatus());
+			Assert.assertEquals(WorkOrder.STATUS.ISSUED,wo.getStatus());
 		}
 	}
 	
@@ -64,7 +61,7 @@ public class AssignRepairTeamToAWorkOrderFeatureTest {
 	@Test
 	public void whenARepairTeamIsAssignedToAWorkOrderItsStatusChangesToAssigned(){
 		aRepairTeamCanBeAssignedToAWorkOrder();
-		Assert.assertEquals(STATUS.ASSIGNED,wo.getStatus());
+		Assert.assertEquals(WorkOrder.STATUS.ASSIGNED,wo.getStatus());
 	}
 
 }

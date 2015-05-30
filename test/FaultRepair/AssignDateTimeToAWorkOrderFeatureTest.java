@@ -24,15 +24,12 @@ public class AssignDateTimeToAWorkOrderFeatureTest {
 	public void upFront(){
 		
 		wo = new WorkOrder();
-		wo.setStatus(STATUS.ISSUED);
+		wo.setStatus(WorkOrder.STATUS.ISSUED);
 		
 		woList.add(wo);
 
 		rt = new RepairTeam();
 		rtList.add(rt);
-		
-		validTestFault = new iFault(true);
-		invalidTestFault = new iFault(false);
 		
 		testValidWorkOrder = new WorkOrder(validTestFault);
 		//testValidWorkOrder = new WorkOrder(invalidTestFault);
@@ -52,7 +49,7 @@ public class AssignDateTimeToAWorkOrderFeatureTest {
 	@Before
 	public void GivenAllTheWorkOrdersHaveStatusIssued(){
 		for(WorkOrder wo: woList){
-			Assert.assertEquals(STATUS.ISSUED,wo.getStatus());
+			Assert.assertEquals(WorkOrder.STATUS.ISSUED,wo.getStatus());
 		}
 	}
 	
@@ -66,7 +63,7 @@ public class AssignDateTimeToAWorkOrderFeatureTest {
 	@Test
 	public void whenADateAndTimesAssignedToAWorkOrderItsStatusChangesToScheduled(){
 		aDateAndTimeCanBeAssignedToAWorkOrder();
-		Assert.assertEquals(STATUS.SCHEDULED, wo.getStatus());
+		Assert.assertEquals(WorkOrder.STATUS.SCHEDULED, wo.getStatus());
 	}
 
 }
