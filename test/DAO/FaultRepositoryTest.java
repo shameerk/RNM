@@ -1,16 +1,16 @@
-package FaultRepair;
+package DAO;
 
 import java.util.List;
 import org.junit.Test;
 
-import DAO.RNMDAO;
+import DAO.FaultRepository;
 import FaultLogging.Fault;
 
-public class DAOTest {
+public class FaultRepositoryTest {
 
 	@Test
 	public void theDAOCanOutputAListOfFaults() {
-		RNMDAO dao = new RNMDAO();
+		FaultRepository dao = new FaultRepository();
 		List<Fault> faultList = dao.getFaults();
 		
 		for(Fault fault : faultList){

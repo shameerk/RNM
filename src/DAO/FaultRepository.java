@@ -7,7 +7,7 @@ import com.sun.org.apache.bcel.internal.generic.F2D;
 import FaultLogging.Fault;
 
 
-public class RNMDAO {
+public class FaultRepository {
 	
 	public List<Fault> getFaults(){
 		

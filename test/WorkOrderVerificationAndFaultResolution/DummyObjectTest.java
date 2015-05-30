@@ -1,5 +1,5 @@
 package WorkOrderVerificationAndFaultResolution;
 
-public class VerifyWOTest {
+public class DummyObjectTest {
 
 }

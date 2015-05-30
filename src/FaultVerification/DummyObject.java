@@ -1,5 +1,5 @@
 package FaultVerification;
 
-public class VerifyTest {
+public class DummyObject {
 
 }
