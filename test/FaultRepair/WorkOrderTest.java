@@ -62,47 +62,5 @@ public class WorkOrderTest {
 		Assert.assertTrue(testInvalidWorkOrder.getStatus() == STATUS.NOSTATUS);
 	}
 	
-	@Test//Thinus
-	public void weHaveAListOfWorkOrders(){
-		Assert.assertTrue(woList instanceof List);
-	}
-	
-	
-	@Test //Thinus
-	public void weHaveAListOfApprovedRepairTeams(){
-		Assert.assertTrue(rtList instanceof List);
-	}
-	
-	@Test//Thinus
-	public void allTheWorkOrdersHaveStatusIssued(){
-		for(WorkOrder wo: woList){
-			Assert.assertEquals(STATUS.ISSUED,wo.getStatus());
-		}
-	}
-	
-	@Test//Thinus
-	public void aRepairTeamCanBeAssignedToAWorkOrder(){
-		wo.assignRepairTeam(rtList.get(0));
-		
-	}
-	
-	@Test//Thinus
-	public void whenARepairTeamIsAssignedToAWorkOrderItsStatusChangesToAssigned(){
-		wo.assignRepairTeam(rtList.get(0));
-		Assert.assertEquals(STATUS.ASSIGNED,wo.getStatus());
-	}
-	
-	@Test//Thinus
-	public void aDateAndTimeCanBeAssignedToAWorkOrder(){
-		Date dateAndTime = new Date();
-		wo.schedule(dateAndTime);
-	}
 
-	
-	@Test//Thinus
-	public void whenADateAndTimesAssignedToAWorkOrderItsStatusChangesToScheduled(){
-		Date dateAndTime = new Date();
-		wo.schedule(dateAndTime);
-		Assert.assertEquals(STATUS.SCHEDULED, wo.getStatus());
-	}
 }
