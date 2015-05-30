@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 
-import FaultRepair.STATUS;
 import FaultRepair.WorkOrder;
 
 public class WorkOrderTest {
@@ -20,13 +19,12 @@ public class WorkOrderTest {
 	
 	@Before
 	public void upFront(){
-			
+		//fixtures	
 		_validTestFault = new iFault(true);
 		_invalidTestFault = new iFault(false);
 		
 		_validFaultWithGeolocation = new iFault(true);
 		_validFaultWithGeolocation.validGeoLocation(true);
-		
 		
 		_validWorkOrder = new WorkOrder(_validTestFault);
 		_invalidWorkOrder = new WorkOrder(_invalidTestFault);
@@ -34,27 +32,37 @@ public class WorkOrderTest {
 	
 	@Test//Steven
 	public void testWorkOrderCreatedNoStatusForInvalidGeoLocation(){
-		Assert.assertTrue(_validWorkOrder.getStatus() == STATUS.NOSTATUS);
+		Assert.assertTrue(_validWorkOrder.getStatus() == WorkOrder.STATUS.NOSTATUS);
 	}
 	
 	@Test//Steven
 	public void testWorkOrderNotCreatedOnInvalidFault(){ 
-		Assert.assertTrue(_invalidWorkOrder.getStatus() == STATUS.NOSTATUS);
+		Assert.assertTrue(_invalidWorkOrder.getStatus() == WorkOrder.STATUS.NOSTATUS);
 	}
 	
 	@Test//Steven
 	public void workOrderCreatedForFaultsVisibileOnMap(){
 		WorkOrder validWorkOrder = new WorkOrder(_validFaultWithGeolocation);
 		
-		Assert.assertTrue(validWorkOrder.getStatus() == STATUS.ISSUED);
+		Assert.assertTrue(validWorkOrder.getStatus() == WorkOrder.STATUS.ISSUED);
 	}
 	
 	@Test//Steven
 	public void workOrderCreatedProvidedThereIsNoOutstandingWorkOrder(){
 		_validFaultWithGeolocation.hasWorkOrder(false);
-		
 		WorkOrder validWorkOrder = new WorkOrder(_validFaultWithGeolocation);
 		
-		Assert.assertTrue(validWorkOrder.getStatus() ==STATUS.ISSUED);
+		Assert.assertTrue(validWorkOrder.getStatus() ==WorkOrder.STATUS.ISSUED);
+	}
+	
+	@Test//Steven
+	public void validWorkOrderCreationAcceptsAnnotation(){
+		_validFaultWithGeolocation.hasWorkOrder(false); 
+		AnnotatedValidWorkOrder annotatedValidWorkOrder = new AnnotatedValidWorkOrder(_validFaultWithGeolocation,"fault.png");
+		
+		Assert.assertTrue(annotatedValidWorkOrder.getStatus() == WorkOrder.STATUS.ISSUED);
+		
+		String imageCheckString = annotatedValidWorkOrder.getImage();
+		Assert.assertTrue(imageCheckString  instanceof String);
 	}
 }
