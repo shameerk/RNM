@@ -1,0 +1,11 @@
+Feature: A repair team can be assigned to a work order
+
+Background: 
+Given we have a list of WorkOrders. 
+Given we have a list of RepairTeams.
+
+Scenario 1
+Given a work order has been issued
+When the work order assigns a repair team to the work order
+Then the work order status changes to assigned
+
