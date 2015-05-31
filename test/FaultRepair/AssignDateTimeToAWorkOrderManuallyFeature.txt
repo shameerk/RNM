@@ -1,0 +1,14 @@
+Feature 2
+Assign a date and time manually
+
+Given a list of work orders with state assigned
+
+When the work order scheduler selects to schedule
+and selects to schedule manually
+Then the available time slots for the assigned repair team is displayed
+
+
+
+When he selects an available time slot 
+Then the work order status changes to scheduled
+and the work order is allocated to that time slot

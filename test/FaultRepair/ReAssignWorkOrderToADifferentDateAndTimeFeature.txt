@@ -1,0 +1,11 @@
+Feature 5
+Re-assign a work order to a different date and time
+
+
+Given a list of work orders with status scheduled
+
+When the work order scheduler selects to "unschedule" a work order
+Then the work order status changes to assigned
+
+
+Use feature 2 or 3 to re-assign work order to a new date and time

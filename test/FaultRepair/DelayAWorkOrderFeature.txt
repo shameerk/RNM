@@ -1,0 +1,9 @@
+Feature 6
+Delay a work order
+
+Given a list of work orders with status scheduled
+
+When the work order scheduler selects to delay a work order
+and the work order scheduler specifies 24 hours
+Then the scheduler calculates the new time slots 
+for all subsequent work orders assigned to this repair team

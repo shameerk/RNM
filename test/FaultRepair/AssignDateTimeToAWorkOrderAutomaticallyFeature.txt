@@ -1,0 +1,10 @@
+Feature 3
+Assign a date and time automatically
+
+Given a list of work orders with state assigned
+
+When the work order scheduler selects to schedule automatically
+and selects to allow displacement of lower priority work orders
+Then the scheduler calculates a time slot 
+and the work order is allocated to that time slot
+and the scheduler calculates new time slots for a displaced lower priority work order

@@ -1,0 +1,10 @@
+Feature 4
+Re-allocate work order to a different repair team
+
+
+Given a list of work orders with status assigned
+
+When the work order scheduler selects to "unassign" the work order
+Then the work order status changes to issued 
+
+Use feature 1 to re-assign to a new repair team

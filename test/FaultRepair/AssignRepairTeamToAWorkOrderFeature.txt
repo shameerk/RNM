@@ -1,11 +1,49 @@
-Feature: A repair team can be assigned to a work order
+Feature 1
+Assign a repair team
 
-Background: 
-Given we have a list of WorkOrders. 
-Given we have a list of RepairTeams.
+Scenario 1: Based on fault type
 
-Scenario 1
-Given a work order has been issued
-When the work order assigns a repair team to the work order
+Given a list of work orders with state issued is displayed in a list
+
+
+When the work order scheduler selects a fault type filter
+and he chooses "road" as the filter value
+Then only the work orders with "road" fault type is displayed
+
+When the work order scheduler selects work orders from the list
+and he selects to assign a repair team
+and he selects the "zzz" repair team
 Then the work order status changes to assigned
+and the work order is allocated to the "zzz" repair team 
 
+
+Scenario 2: Based on proximity 
+
+Given a list of work orders with state issued is displayed
+
+
+When the work order scheduler selects an location filter
+and he chooses "Fourways" as the filter value
+Then only the work orders in the "fourways" location is displayed
+
+When the work order scheduler selects work orders 
+and he selects to assign a repair team
+and he selects the "zzz" repair team
+Then the work order status changes to assigned
+and the work order is allocated to the "zzz" repair team
+
+
+Scenario 3: Based on team availability 
+
+Given a list of work orders with state issued is displayed
+
+When the work order scheduler selects a work order
+and selects to schedule based on team availability
+and selects the preferred date and time
+Then a list of repair teams that are available at that date and time is displayed.
+
+When the work order scheduler selects work orders
+and he selects to assign a repair team
+and he selects the "zzz" repair team
+Then the work order status changes to assigned
+and the work order is allocated to the "zzz" repair team 
