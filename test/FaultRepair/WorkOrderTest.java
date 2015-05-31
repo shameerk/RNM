@@ -5,7 +5,8 @@ package FaultRepair;
 import java.util.Date;
 import java.util.List;*/
 
-import java.awt.List;
+import java.util.List;
+import java.util.Vector;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -76,7 +77,7 @@ public class WorkOrderTest {
 		WorkOrder validWorkOrder = new WorkOrder(_validFaultWithGeolocationAndNoWorkOrder);
 		//BOMaterials  = <>Materials;
 		BillOfMaterials testMaterialsList = validWorkOrder.generateBOMaterials(iFault.FAULTTYPE.POTHOLE);
-		List checkList = testMaterialsList.getMaterialsList();
-		//Assert.assertTrue(checkList.size()> 0);
+		List<String> checkList = testMaterialsList.getMaterialsList();
+		Assert.assertTrue(checkList.size()> 0);
 	}
 }
