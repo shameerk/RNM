@@ -38,6 +38,11 @@ public class WorkOrder implements iWorkOrder{
 		else setStatus(STATUS.NOSTATUS);
 	}
 	
+	public BillOfMaterials generateBOMaterials(iFault.FAULTTYPE faultType){
+		BillOfMaterials billOfMaterials = new BillOfMaterials(faultType);
+		return billOfMaterials;
+	}
+	
 	//Steven
 	public STATUS getStatus() {
 		return status;
@@ -54,6 +59,10 @@ class iFault{
 	private boolean verified;
 	private boolean validLocation=false;
 	private boolean hasWorkOrder = false;
+	
+	public enum FAULTTYPE {
+		POTHOLE,DRAINAGE,TRAFFICLIGHT,ROADMARKING,ACCIDENT,SIGNAGE
+	}
 	
 	public iFault(boolean faultState){
 		this.verified=faultState;	
