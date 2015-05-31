@@ -1,12 +1,6 @@
 package FaultRepair;
 
-
-/*import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;*/
-
 import java.util.List;
-import java.util.Vector;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -75,9 +69,19 @@ public class WorkOrderTest {
 	@Test//Steven
 	public void billOfMaterialsIsCreatedForNatureOfWorkSpecifiedTest(){
 		WorkOrder validWorkOrder = new WorkOrder(_validFaultWithGeolocationAndNoWorkOrder);
-		//BOMaterials  = <>Materials;
+		
 		BillOfMaterials testMaterialsList = validWorkOrder.generateBOMaterials(iFault.FAULTTYPE.POTHOLE);
 		List<String> checkList = testMaterialsList.getMaterialsList();
 		Assert.assertTrue(checkList.size()> 0);
+	}
+	
+	@Test//Steven
+	public void userWithPermissionCanViewFaultTest(){
+		
+	}
+	
+	@Test//Steven
+	public void userWihoutPermissionCannotViewFaultTest(){
+
 	}
 }

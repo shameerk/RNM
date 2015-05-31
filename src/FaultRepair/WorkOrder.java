@@ -1,4 +1,5 @@
 package FaultRepair;
+//import FaultRepair.iFault;
 
 interface iWorkOrder{
 	public String getFaultImage();
@@ -7,15 +8,17 @@ interface iWorkOrder{
 }
 
 public class WorkOrder implements iWorkOrder{
+	private STATUS _status;
+	private long _workOrderID;
 	
+	//Steven
 	public enum STATUS {
 		NOSTATUS,ISSUED,ASSIGNED,SCHEDULED,COMPLETED
 	}
 	
-	private STATUS status;
-
+	//Steven
 	public WorkOrder(){
-		this.status = STATUS.NOSTATUS;
+		this._status = STATUS.NOSTATUS;
 	}
 	
 	//Steven
@@ -25,6 +28,14 @@ public class WorkOrder implements iWorkOrder{
 	
 	public String getFaultImage(){
 		return "";
+	}
+	
+	public void setWorkOrderID(long id){
+		this._workOrderID = id;
+	}
+	
+	public long getWorkOrderID(){
+		return _workOrderID;
 	}
 	
 	//Steven
@@ -45,46 +56,12 @@ public class WorkOrder implements iWorkOrder{
 	
 	//Steven
 	public STATUS getStatus() {
-		return status;
+		return _status;
 	}
 
 	public void setStatus(STATUS status) {
-		this.status = status;
+		this._status = status;
 	}
 	
 }
 
-//Steven
-class iFault{
-	private boolean verified;
-	private boolean validLocation=false;
-	private boolean hasWorkOrder = false;
-	
-	public enum FAULTTYPE {
-		POTHOLE,DRAINAGE,TRAFFICLIGHT,ROADMARKING,ACCIDENT,SIGNAGE
-	}
-	
-	public iFault(boolean faultState){
-		this.verified=faultState;	
-	}
-
-	public boolean verified(){
-		return this.verified;
-	}
-	
-	public boolean validLocation(){
-		return this.validLocation;
-	}
-	
-	public boolean hasWorkOrder(){
-		return this.hasWorkOrder;
-	}
-	
-	public void hasWorkOrder(boolean hasWorkOrder){
-		this.hasWorkOrder = hasWorkOrder;
-	}
-	
-	public void validGeoLocation(boolean validLocation){
-		this.validLocation=validLocation;
-	}
-}
