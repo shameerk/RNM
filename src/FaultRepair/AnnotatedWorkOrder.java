@@ -1,10 +1,10 @@
 package FaultRepair;
 
-public class AnnotatedValidWorkOrder extends WorkOrder{
+public class AnnotatedWorkOrder extends WorkOrder{
 	private String _faultImage;
 	private String _faultAnnotation;
 	
-	public AnnotatedValidWorkOrder(iFault fault,String imageName,String annotation){
+	public AnnotatedWorkOrder(iFault fault,String imageName,String annotation){
 		super(fault);
 		setImage(imageName);
 		setFaultAnnotation(annotation);

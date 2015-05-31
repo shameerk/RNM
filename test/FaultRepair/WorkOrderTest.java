@@ -50,7 +50,7 @@ public class WorkOrderTest {
 	}
 	
 	@Test//Steven
-	public void workOrderCreatedProvidedThereIsNoOutstandingWorkOrder(){
+	public void workOrderCreatedProvidedThereIsNoOutstandingWorkOrderTest(){
 		WorkOrder validWorkOrder = new WorkOrder(_validFaultWithGeolocationAndNoWorkOrder);
 
 		Assert.assertTrue(validWorkOrder.getStatus() ==WorkOrder.STATUS.ISSUED);
@@ -58,7 +58,7 @@ public class WorkOrderTest {
 	
 	@Test//Steven
 	public void validWorkOrderCreationAcceptsAnnotationTest(){
-		WorkOrder annotatedValidWorkOrder = new AnnotatedValidWorkOrder(_validFaultWithGeolocationAndNoWorkOrder,"fault.png","Some Annotation");
+		WorkOrder annotatedValidWorkOrder = new AnnotatedWorkOrder(_validFaultWithGeolocationAndNoWorkOrder,"fault.png","Some Annotation");
 		
 		Assert.assertTrue(annotatedValidWorkOrder.getStatus() == WorkOrder.STATUS.ISSUED);
 		
@@ -71,8 +71,17 @@ public class WorkOrderTest {
 		WorkOrder validWorkOrder = new WorkOrder(_validFaultWithGeolocationAndNoWorkOrder);
 		
 		BillOfMaterials testMaterialsList = validWorkOrder.generateBOMaterials(iFault.FAULTTYPE.POTHOLE);
-		List<String> checkList = testMaterialsList.getMaterialsList();
+		List<String> checkList = testMaterialsList.getMaterialsAsListOfStrings();
 		Assert.assertTrue(checkList.size()> 0);
+	}
+	
+	@Test //Steven
+	public void requiredEquipmentListCreatedForNatureOfWorkSpecified(){
+		WorkOrder validWorkOrder = new WorkOrder(_validFaultWithGeolocationAndNoWorkOrder);
+		
+		RequiredEquipment testEquipmentList = validWorkOrder.generateEquipmentList(iFault.FAULTTYPE.POTHOLE);
+		List<String> equipmentList = testEquipmentList.getRequiredEquipmentListOfStrings();
+		Assert.assertTrue(equipmentList.size()> 0);
 	}
 	
 	@Test//Steven

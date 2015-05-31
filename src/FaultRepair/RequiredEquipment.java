@@ -12,7 +12,7 @@ public class RequiredEquipment {
 	}
 	
 	private void populateMaterialsList(iFault.FAULTTYPE faulttype){
-		//_equipmentList.add("equipment1");
+		_equipmentList.add("equipment1");
 	}
 	
 	public List<String> getRequiredEquipmentListOfStrings(){
