@@ -1,12 +1,11 @@
 package FaultRepair;
 
-import static org.junit.Assert.*;
+import org.junit.Assert;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,7 +20,7 @@ public class AssignDateTimeToWorkOrderManuallyTest {
 	
 	
 	@Before
-	public void upFront(){
+	public void initialize(){
 		
 		wo = new WorkOrder();
 		wo.setStatus(WorkOrder.STATUS.ISSUED);
@@ -53,16 +52,17 @@ public class AssignDateTimeToWorkOrderManuallyTest {
 		}
 	}
 	
+	/*
 	@Test
 	public void aDateAndTimeCanBeAssignedToAWorkOrder(){
 		Date dateAndTime = new Date();
 		wo.schedule(dateAndTime);
-	}
+	}*/
 
 	
 	@Test
 	public void whenADateAndTimesAssignedToAWorkOrderItsStatusChangesToScheduled(){
-		aDateAndTimeCanBeAssignedToAWorkOrder();
+		//aDateAndTimeCanBeAssignedToAWorkOrder();
 		Assert.assertEquals(WorkOrder.STATUS.SCHEDULED, wo.getStatus());
 	}
 

@@ -3,6 +3,7 @@ package FaultRepair;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -14,14 +15,12 @@ public class AssignRepairTeamToWorkOrderTest {
 	
 	WorkOrder wo;
 	RepairTeam rt;
-	iFault validTestFault,invalidTestFault;
-	WorkOrder testValidWorkOrder;
 	ArrayList<WorkOrder> woList = new ArrayList<>();
 	ArrayList<RepairTeam> rtList = new ArrayList<>();
 	
 	
 	@Before
-	public void upFront(){
+	public void initialize(){
 		
 		wo = new WorkOrder();
 		wo.setStatus(WorkOrder.STATUS.ISSUED);
@@ -31,37 +30,103 @@ public class AssignRepairTeamToWorkOrderTest {
 		rt = new RepairTeam();
 		rtList.add(rt);
 				
-		testValidWorkOrder = new WorkOrder(validTestFault);
-		//testValidWorkOrder = new WorkOrder(invalidTestFault);
+		givenWeHaveAListOfWorkOrders();
+		givenWeHaveAListOfApprovedRepairTeams();
+		givenAllTheWorkOrdersHaveStatusIssued();
 	}
 
-	@Before
+
 	public void givenWeHaveAListOfWorkOrders(){
 		Assert.assertTrue(woList instanceof List);
 	}
 	
 	
-	@Before
-	public void givenweHaveAListOfApprovedRepairTeams(){
+	
+	public void givenWeHaveAListOfApprovedRepairTeams(){
 		Assert.assertTrue(rtList instanceof List);
 	}
 	
-	@Before
+	
 	public void givenAllTheWorkOrdersHaveStatusIssued(){
 		for(WorkOrder wo: woList){
 			Assert.assertEquals(WorkOrder.STATUS.ISSUED,wo.getStatus());
 		}
 	}
 	
-	@Test
-	public void aRepairTeamCanBeAssignedToAWorkOrder(){
-		wo.assignRepairTeam(rtList.get(0));
+
+	/**
+	 * 
+	 * Test if a repair team can be assigned to a WorkOrder
+	 * @param rt
+	 */
+	public void aRepairTeamCanBeAssignedToAWorkOrder(RepairTeam rt){
+		fail();
+	}
+
+	
+	
+	public void whenAFilterIsAppliedWorkOrdersAreFiltered(String filterType, String filterValue){
+		
+		List<WorkOrder> filteredWoList = new ArrayList<>();
+		
+		for(WorkOrder wo : filteredWoList){
+			Assert.assertEquals(filterValue, wo.getFaultType());
+		}
 	}
 	
-	@Test
+	
 	public void whenARepairTeamIsAssignedToAWorkOrderItsStatusChangesToAssigned(){
-		aRepairTeamCanBeAssignedToAWorkOrder();
-		Assert.assertEquals(WorkOrder.STATUS.ASSIGNED,wo.getStatus());
+	
+		aRepairTeamCanBeAssignedToAWorkOrder(new RepairTeam("zzz"));
+		Assert.assertEquals(wo.getStatus(),WorkOrder.STATUS.ASSIGNED);
+	
 	}
+	
+	
+	public List<RepairTeam> weCanGetAListOfRepairTeamsThatAreAvailableForADateTime(Date dateTime){
+		
+		List<RepairTeam> rtAvailableList = new ArrayList<>();
+		
+		//Write logic to get rtAvailableList
+		
+		
+		
+		for(RepairTeam rt : rtAvailableList){
+			Assert.assertEquals(rt.getAvailability(dateTime),true);
+		}
+		
+		return rtAvailableList;
+	}
+	
+	/**
+	 * 
+	 * Scenario 1
+	 */
+	@Test
+	public void basedOnFaultType(){
+		whenAFilterIsAppliedWorkOrdersAreFiltered("FaultType", "road");
+		whenARepairTeamIsAssignedToAWorkOrderItsStatusChangesToAssigned();
+	}
+	
+	
+	/**
+	 * 
+	 * Scenario 2
+	 */
+	@Test
+	public void basedOnProximity(){
+		whenAFilterIsAppliedWorkOrdersAreFiltered("Location", "Fourways");
+	}
+	
+	/**
+	 * 
+	 * Scenario 3
+	 */
+	@Test
+	public void basedOnTeamAvailability(){
+		List<RepairTeam> rtList = weCanGetAListOfRepairTeamsThatAreAvailableForADateTime(new Date());
+		aRepairTeamCanBeAssignedToAWorkOrder(rtList.get(0));
+	}
+	
 
 }
