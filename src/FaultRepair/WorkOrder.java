@@ -49,9 +49,16 @@ public class WorkOrder implements iWorkOrder{
 		else setStatus(STATUS.NOSTATUS);
 	}
 	
+	//Steven
 	public BillOfMaterials generateBOMaterials(iFault.FAULTTYPE faultType){
 		BillOfMaterials billOfMaterials = new BillOfMaterials(faultType);
 		return billOfMaterials;
+	}
+	
+	//Steven
+	public RequiredEquipment generateEquipmentList(iFault.FAULTTYPE faultType){
+		RequiredEquipment requiredEquipment = new RequiredEquipment(faultType);
+		return requiredEquipment;
 	}
 	
 	//Steven

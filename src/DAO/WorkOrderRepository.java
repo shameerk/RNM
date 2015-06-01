@@ -9,6 +9,8 @@ public class WorkOrderRepository {
 	iFault _validTestFault;
 	List<WorkOrder> _workOrderList;
 	
+	//Modelled Static Data
+	
 	//in this constructor, set static values to be used by DAO
 	public WorkOrderRepository(){
 		_validTestFault = new iFault(true);

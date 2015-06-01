@@ -6,6 +6,7 @@ package FaultVerification;
     
     public GeoLocator(String Address){
         this.latitude = googleAPIlat(Address);
+        
         this.longtitude = googleAPIlong(Address);
         this direction = gooogleAPIlat(Address);
     }
