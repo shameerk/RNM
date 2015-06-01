@@ -1,0 +1,71 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package za.ac.wits.elen7045.rnt.faultlogging;
+
+import java.util.ArrayList;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.jws.WebService;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
+import za.ac.wits.elen7045.rnt.common.GeolocatorSessionBean;
+
+/**
+ *
+ * @author michael
+ */
+@Stateless
+@WebService
+@Path("faultlogging")
+public class FaultlLoggingFacadeSessionBean {
+
+    // Add business logic below. (Right-click in editor and choose
+    // "Insert Code > Add Business Method")
+    private ArrayList<Fault> FaultList = new ArrayList<Fault>();
+    private Fault fault;
+    private String address;
+ //private GeolocatorSessionBean geolocator; 
+
+    public ArrayList<Fault> getFaultList() {
+        return FaultList;
+    }
+
+    public ArrayList<Fault> nearbyFaults(String periodDate) {
+        return FaultList;
+    }
+
+    /* public void setFaultList(FaultList){   
+     this.FaultList;   
+   	 
+     } */
+    public Fault faultCreator() {
+        fault = new Fault();
+        return fault;
+    }
+
+    @EJB
+    GeolocatorSessionBean geoloc;
+
+    @GET
+    public String getLocation(@QueryParam("streetName") String streetName) {
+
+        String retLocAreaCode = geoloc.getGeolocator(streetName);
+
+        return retLocAreaCode;
+    }
+
+    public ArrayList checkNearest(ArrayList<Fault> faultList) {
+        for (int i = 0; i < faultList.size(); i++) {
+            /*if (fault.getGeoCode().equalsIgnoreCase(retLocAreaCode)) 
+             { 
+            
+             }*/
+        }
+        return FaultList;
+    }
+
+}
