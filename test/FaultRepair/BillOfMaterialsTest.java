@@ -1,30 +1,39 @@
 package FaultRepair;
 
 import java.util.List;
-import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 
+import DAO.BillOfMaterialsRepository;
+
 public class BillOfMaterialsTest {
 	//private field here
-	private List<String> _materialsListCheck;
-
+	private BillOfMaterialsRepository _billOfMaterialsRepo;
+	private BillOfMaterials _billOfMaterialsSignage;
+	
 	@Before
 	public void upFront(){
 		//fixtures
-		_materialsListCheck = new ArrayList<String>();
+		_billOfMaterialsRepo = new BillOfMaterialsRepository();
+		_billOfMaterialsSignage = new BillOfMaterials(iFault.FAULTTYPE.SIGNAGE,_billOfMaterialsRepo);
 	}
 	
 	@Test//Steven
-	public void testEmptyBillOfMaterialsListCreatedForFaultPassed(){
-		//generate default bill of material for fault type
-		BillOfMaterials billOfMaterials = new BillOfMaterials(iFault.FAULTTYPE.POTHOLE);
+	public void DAOReturnsBillOfMaterialsAsListOfRepairListItem(){
+		List<RepairListItem> billOfMaterials = _billOfMaterialsSignage.getListOfItems();
 		
-		Assert.assertTrue(billOfMaterials instanceof BillOfMaterials);
-		_materialsListCheck = billOfMaterials.getMaterialsAsListOfStrings();
+		for (RepairListItem element : billOfMaterials){
+			Assert.assertTrue(element instanceof RepairListItem);
+		}
 		
-		Assert.assertTrue(_materialsListCheck.size() == 0);
+	}
+	
+	@Test//Steven
+	public void DAOReturnsBillOfMaterialsForFaultSpecificed(){
+		List<RepairListItem> billOfMaterials = _billOfMaterialsSignage.getListOfItems();
+		
+		Assert.assertTrue(billOfMaterials.size()==3);
 	}
 }

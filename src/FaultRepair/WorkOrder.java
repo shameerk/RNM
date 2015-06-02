@@ -1,5 +1,8 @@
 package FaultRepair;
+
+import DAO.BillOfMaterialsRepository;
 //import FaultRepair.iFault;
+import DAO.RequiredEquipmentRepository;
 
 interface iWorkOrder{
 	public String getFaultImage();
@@ -50,14 +53,14 @@ public class WorkOrder implements iWorkOrder{
 	}
 	
 	//Steven
-	public BillOfMaterials generateBOMaterials(iFault.FAULTTYPE faultType){
-		BillOfMaterials billOfMaterials = new BillOfMaterials(faultType);
+	public BillOfMaterials generateBOMaterials(iFault.FAULTTYPE faultType,BillOfMaterialsRepository BOMRepo){
+		BillOfMaterials billOfMaterials = new BillOfMaterials(faultType,BOMRepo);
 		return billOfMaterials;
 	}
 	
 	//Steven
-	public RequiredEquipment generateEquipmentList(iFault.FAULTTYPE faultType){
-		RequiredEquipment requiredEquipment = new RequiredEquipment(faultType);
+	public RequiredEquipment generateEquipmentList(iFault.FAULTTYPE faultType,RequiredEquipmentRepository ReRepo){
+		RequiredEquipment requiredEquipment = new RequiredEquipment(faultType,ReRepo);
 		return requiredEquipment;
 	}
 	

@@ -1,29 +1,38 @@
 package DAO;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import FaultRepair.BillOfMaterials;
+import FaultRepair.RepairListItem;
 import FaultRepair.iFault;
 import FaultRepair.RequiredEquipment;
 
-public class RequiredEquipmentRepository {
+public class RequiredEquipmentRepository extends genericRepository {
 
-	private List<RequiredEquipment> _requiredEquipmentLists;
-	
-	public RequiredEquipmentRepository(iFault.FAULTTYPE faulttype){
-		populateEquipmentList(faulttype);
-	}
-
-	private void populateEquipmentList(iFault.FAULTTYPE fault){
-		_requiredEquipmentLists = new ArrayList<RequiredEquipment>();
+	//in this constructor, set static values to be used by DAO
+		public RequiredEquipmentRepository(){
+			_hashTable = new Hashtable<iFault.FAULTTYPE,List<RepairListItem>>();
+			generateHashtableDummyData();
+		}
 		
-		RequiredEquipment dummyRequiredEquipmentList1 = new RequiredEquipment(iFault.FAULTTYPE.POTHOLE);
-		_requiredEquipmentLists.add(dummyRequiredEquipmentList1);
-	}
-	
-	public List<RequiredEquipment> getListOfRequiredEquipmentLists(){
-		return _requiredEquipmentLists;
-	}
-	
+		protected void generateHashtableDummyData(){
+			RepairListItem hammers = new RepairListItem(2,"unit","Tar");
+			RepairListItem drills = new RepairListItem(3,"unit","Wood");
+			RepairListItem spades = new RepairListItem(3,"unit","Pipe");
+
+			
+			List<RepairListItem> tempMaterialsListPothole = new ArrayList<RepairListItem>();
+			tempMaterialsListPothole = createEquipmentRepairItemList(hammers);
+			_hashTable.put(iFault.FAULTTYPE.POTHOLE,tempMaterialsListPothole);
+			
+			List<RepairListItem> tempMaterialsListDrainage = new ArrayList<RepairListItem>();
+			tempMaterialsListDrainage = createEquipmentRepairItemList(hammers,drills);
+			_hashTable.put(iFault.FAULTTYPE.DRAINAGE,tempMaterialsListDrainage);
+			
+			List<RepairListItem> tempMaterialsListtraffic = new ArrayList<RepairListItem>();
+			tempMaterialsListtraffic = createEquipmentRepairItemList(hammers,drills,spades);
+			_hashTable.put(iFault.FAULTTYPE.TRAFFICLIGHT,tempMaterialsListtraffic);
+		}
 }

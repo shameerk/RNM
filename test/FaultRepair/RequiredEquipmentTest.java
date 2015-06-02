@@ -1,30 +1,38 @@
 package FaultRepair;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import DAO.RequiredEquipmentRepository;
+
 public class RequiredEquipmentTest {
-	private List<String> _equipment;
+	private RequiredEquipmentRepository _requiredEquipmentRepo;
+	private RequiredEquipment _requiredEquipmentDrainage;
 	
 	@Before
 	public void upFront(){
 		//fixtures
-		_equipment = new ArrayList<String>();
+		_requiredEquipmentRepo = new RequiredEquipmentRepository();
+		_requiredEquipmentDrainage = new RequiredEquipment(iFault.FAULTTYPE.DRAINAGE,_requiredEquipmentRepo);
 	}
 	
 	@Test//Steven
-	public void testEmptyBillOfMaterialsListCreatedForFaultPassed(){
-		//generate default required equipment for fault type
-		RequiredEquipment requiredEquipmentForFault = new RequiredEquipment(iFault.FAULTTYPE.POTHOLE);
+	public void DAOReturnsBillOfMaterialsAsListOfRepairListItem(){
+		List<RepairListItem> requiredEquipment = _requiredEquipmentDrainage.getListOfItems();
+		
+		for (RepairListItem element : requiredEquipment){
+			Assert.assertTrue(element instanceof RepairListItem);
+		}
+		
+	}
 	
-		Assert.assertTrue(requiredEquipmentForFault instanceof RequiredEquipment);
+	@Test//Steven
+	public void DAOReturnsRequiredEquipmentForFaultSpecificed(){
+		List<RepairListItem> requiredEquipment = _requiredEquipmentDrainage.getListOfItems();
 		
-		_equipment = requiredEquipmentForFault.getRequiredEquipmentListOfStrings();
-		
-		Assert.assertTrue(_equipment.size() == 0);
+		Assert.assertTrue(requiredEquipment.size()==2);
 	}
 }

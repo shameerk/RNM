@@ -3,45 +3,44 @@ package DAO;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
-import FaultRepair.BillOfMaterials;
+import FaultRepair.RepairListItem;
 import FaultRepair.iFault;
 
 public class BillOfMaterialsRepositoryTest {
+	private BillOfMaterialsRepository _billOfMaterialsRepo;
 	
-	@Test//Steven
-	public void theRepositoryReturnsListOfBillOfMaterials(){
-		BillOfMaterialsRepository billOfMaterialsRepo = new BillOfMaterialsRepository();
-		List<BillOfMaterials> billOfMaterialsList = billOfMaterialsRepo.getListOfBillOfMaterials();
+	@Before
+	public void upFront(){
+		//fixtures
+		_billOfMaterialsRepo = new BillOfMaterialsRepository();
+	}
 	
-		Assert.assertTrue(billOfMaterialsList.size() > 0);
-	
-		for (BillOfMaterials billOfMaterials: billOfMaterialsList){
-			Assert.assertTrue(billOfMaterials instanceof BillOfMaterials);
+	@Test // Steven
+	public void repositoryReturnsBillOfMaterialsAsListOfRepairListItems(){
+		List<RepairListItem> billOfMaterials = _billOfMaterialsRepo.getListForFaultType(iFault.FAULTTYPE.POTHOLE);
+		
+		for (RepairListItem element : billOfMaterials){
+			Assert.assertTrue(element instanceof RepairListItem);
 		}
 	}
-
+	
 	@Test //Steven
 	public void repositoryReturnsBOMListForSpecifiedFaultType(){
-		BillOfMaterialsRepository billOfMaterialsRepo = new BillOfMaterialsRepository();
 		
-		List<String> BOMList = billOfMaterialsRepo.getBillOfMaterialsForFaultType(iFault.FAULTTYPE.POTHOLE);
+		List<RepairListItem> BOMList = _billOfMaterialsRepo.getListForFaultType(iFault.FAULTTYPE.POTHOLE);
 		Assert.assertTrue(BOMList.size()==1);
-		BOMList = billOfMaterialsRepo.getBillOfMaterialsForFaultType(iFault.FAULTTYPE.DRAINAGE);
+		BOMList = _billOfMaterialsRepo.getListForFaultType(iFault.FAULTTYPE.DRAINAGE);
 		Assert.assertTrue(BOMList.size()==2);
-		BOMList = billOfMaterialsRepo.getBillOfMaterialsForFaultType(iFault.FAULTTYPE.TRAFFICLIGHT);
+		BOMList = _billOfMaterialsRepo.getListForFaultType(iFault.FAULTTYPE.TRAFFICLIGHT);
 		Assert.assertTrue(BOMList.size()==3);
-		BOMList = billOfMaterialsRepo.getBillOfMaterialsForFaultType(iFault.FAULTTYPE.ROADMARKING);
+		BOMList = _billOfMaterialsRepo.getListForFaultType(iFault.FAULTTYPE.ROADMARKING);
 		Assert.assertTrue(BOMList.size()==4);
-		BOMList = billOfMaterialsRepo.getBillOfMaterialsForFaultType(iFault.FAULTTYPE.ACCIDENT);
-		Assert.assertTrue(BOMList.size()==5);
-		BOMList = billOfMaterialsRepo.getBillOfMaterialsForFaultType(iFault.FAULTTYPE.SIGNAGE);
-		Assert.assertTrue(BOMList.size()==6);
-		
-		/*for(String someString : BOMList) {
-            System.out.println(someString);
-        }*/
-		
+		BOMList = _billOfMaterialsRepo.getListForFaultType(iFault.FAULTTYPE.ACCIDENT);
+		Assert.assertTrue(BOMList.size()==3);
+		BOMList = _billOfMaterialsRepo.getListForFaultType(iFault.FAULTTYPE.SIGNAGE);
+		Assert.assertTrue(BOMList.size()==3);
 	}
 }

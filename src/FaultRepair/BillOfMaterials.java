@@ -1,23 +1,15 @@
 package FaultRepair;
 
-import java.util.List;
-import java.util.ArrayList;
+import DAO.BillOfMaterialsRepository;
 
-public class BillOfMaterials {
-	private List<String> _materialsList;
+public class BillOfMaterials extends RepairListContainer{
 	
-	public BillOfMaterials(iFault.FAULTTYPE faultype){
-		_materialsList = new ArrayList<String>();
-		populateMaterialsList(faultype);
-	}
-
-	private void populateMaterialsList(iFault.FAULTTYPE faulttype){
-		_materialsList.add("item1");
-		/*_materialsList.add("item2");
-		_materialsList.add("item3");*/
+	public BillOfMaterials(iFault.FAULTTYPE faultype,BillOfMaterialsRepository BOMRepo){
+		super();
+		generateBillOfMaterials(faultype,BOMRepo);
 	}
 	
-	public List<String> getMaterialsAsListOfStrings(){
-		return _materialsList;
+	private void generateBillOfMaterials(iFault.FAULTTYPE faulttype,BillOfMaterialsRepository BOMRepo){
+		_materialsList = BOMRepo.getListForFaultType(faulttype);
 	}
 }

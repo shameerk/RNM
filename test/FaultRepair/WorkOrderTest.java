@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 
+import DAO.BillOfMaterialsRepository;
+import DAO.RequiredEquipmentRepository;
 import FaultRepair.WorkOrder;
 
 public class WorkOrderTest {
@@ -13,7 +15,8 @@ public class WorkOrderTest {
 	private iFault _validTestFault,_invalidTestFault;
 	private iFault _validFaultWithGeolocation,_validFaultWithGeolocationAndNoWorkOrder;
 	private WorkOrder _validWorkOrder,_invalidWorkOrder;
-	
+	private RequiredEquipmentRepository _requiredEquipmentRepo;
+	private BillOfMaterialsRepository _billOfMaterialsRepo;
 	
 	@Before
 	public void upFront(){
@@ -27,6 +30,9 @@ public class WorkOrderTest {
 		_validFaultWithGeolocationAndNoWorkOrder = new iFault(true);
 		_validFaultWithGeolocationAndNoWorkOrder.validGeoLocation(true);
 		_validFaultWithGeolocationAndNoWorkOrder.hasWorkOrder(false);
+		
+		_requiredEquipmentRepo = new RequiredEquipmentRepository();
+		_billOfMaterialsRepo = new BillOfMaterialsRepository();
 		
 		_validWorkOrder = new WorkOrder(_validTestFault);
 		_invalidWorkOrder = new WorkOrder(_invalidTestFault);
@@ -70,8 +76,8 @@ public class WorkOrderTest {
 	public void billOfMaterialsIsCreatedForNatureOfWorkSpecifiedTest(){
 		WorkOrder validWorkOrder = new WorkOrder(_validFaultWithGeolocationAndNoWorkOrder);
 		
-		BillOfMaterials testMaterialsList = validWorkOrder.generateBOMaterials(iFault.FAULTTYPE.POTHOLE);
-		List<String> checkList = testMaterialsList.getMaterialsAsListOfStrings();
+		BillOfMaterials testMaterialsList = validWorkOrder.generateBOMaterials(iFault.FAULTTYPE.POTHOLE,_billOfMaterialsRepo);
+		List<RepairListItem> checkList = testMaterialsList.getListOfItems();
 		Assert.assertTrue(checkList.size()> 0);
 	}
 	
@@ -79,8 +85,8 @@ public class WorkOrderTest {
 	public void requiredEquipmentListCreatedForNatureOfWorkSpecified(){
 		WorkOrder validWorkOrder = new WorkOrder(_validFaultWithGeolocationAndNoWorkOrder);
 		
-		RequiredEquipment testEquipmentList = validWorkOrder.generateEquipmentList(iFault.FAULTTYPE.POTHOLE);
-		List<String> equipmentList = testEquipmentList.getRequiredEquipmentListOfStrings();
+		RequiredEquipment testEquipmentList = validWorkOrder.generateEquipmentList(iFault.FAULTTYPE.POTHOLE,_requiredEquipmentRepo);
+		List<RepairListItem> equipmentList = testEquipmentList.getListOfItems();
 		Assert.assertTrue(equipmentList.size()> 0);
 	}
 	
